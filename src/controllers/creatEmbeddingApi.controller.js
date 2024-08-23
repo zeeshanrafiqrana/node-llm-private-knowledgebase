@@ -29,13 +29,11 @@ const createVactor = asyncHandler(async (req, res) => {
         });
         console.log(`Inserted row id is: ${id}`);
       } catch (error) {
-        console.log("error=======",error)
         throw new ApiError(500, "An error occurred while processing comment");
       }
     }
     return res.status(200).json(new ApiResponse(200, {}, "Comments processed successfully"));
   } catch (error) {
-    console.log("error=======",error)
     throw new ApiError(500, "An error occurred while creating a vactor");
   }
 });
