@@ -44,8 +44,7 @@ const processFile = async (filePath) => {
   
       default:
         throw new ApiError(400, "Unsupported file type");
-    }
-    console.log("object: ", text)       
+    }     
   return text;
 };
 
@@ -55,7 +54,6 @@ const convertTextToJsonArray = (text,fileExt) => {
         if (fileExt === ".json") {
             return JSON.parse(text);
           }
-      
           const lines = text.split('\n').filter(line => line.trim().length > 0);
           return lines.map(line => ({ text: line }));
     } catch (error) {
@@ -74,7 +72,6 @@ const createEmbeddingDocument = asyncHandler(async (req, res) => {
     const fileExt = path.extname(document).toLowerCase();
     const fileText = await processFile(document);
     const commentsArray = convertTextToJsonArray(fileText, fileExt);
-console.log("commentsArray=======",commentsArray)
     if (Array.isArray(commentsArray)) {
       for (let i = 0; i < commentsArray.length; i++) {
         const commentObj = commentsArray[i];
